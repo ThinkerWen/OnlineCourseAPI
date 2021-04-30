@@ -31,7 +31,7 @@ https://wangke.hive-net.cn
 **题库答案获取api如下：**
 
 ```http
-https://www.hive-net.cn:8443/wechat/?token=free&question=在什么情况下N95口罩需要更换?
+https://www.hive-net.cn:8443/wechat/search/?token=free&question=在什么情况下N95口罩需要更换?
 ```
 
 **链接地址不变，只需要将question=后的“在什么情况下N95口罩需要更换?”更换为你像搜索的问题即可返回答案**
@@ -54,7 +54,7 @@ https://www.hive-net.cn:8443/wechat/?token=free&question=在什么情况下N95�
 import requests
 
 def get_reason(question):
-    url = "https://www.hive-net.cn:8443/wechat/?token=free&question=" + question
+    url = "https://www.hive-net.cn:8443/wechat/search/?token=free&question=" + question
     try:  
         r = requests.get(url)  
         r.raise_for_status()  
