@@ -19,7 +19,7 @@
 ------
 
 ```http
-http://wangke.hive-net.cn
+http://wangke.hive-net.cn/wangke
 ```
 
 **输入题目后回车即可**
