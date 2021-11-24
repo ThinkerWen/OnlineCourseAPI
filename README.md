@@ -19,7 +19,7 @@
 ------
 
 ```http
-http://wangke.hive-net.cn/wangke
+https://wangke.hive-net.cn/wangke（网页端已关闭开放，api接口持续开放）
 ```
 
 **输入题目后回车即可**
