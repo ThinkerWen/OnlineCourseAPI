@@ -12,7 +12,7 @@
 
 #### 支持模糊搜索！！（输入部分题目即可搜索到答案）
 
-
+&emsp;&emsp;
 
 ### **网页端搜索网址**
 
@@ -23,6 +23,8 @@ http://wangke.hive-net.cn/wangke
 ```
 
 **输入题目后回车即可**
+
+&emsp;&emsp;
 
 ### 答案API
 
@@ -45,7 +47,9 @@ https://wangke.hive-net.cn/wechat/search/?token=free&question=在什么情况下
 ```json
 {"has_reason": 1, "question": "\u5728\u4ec0\u4e48\u60c5\u51b5\u4e0bN95\u53e3\u7f69\u9700\u8981\u66f4\u6362?", "reason": "\n1\uff1a\u53e3\u7f69\u6709\u7834\u635f.\u635f\u574f\u6216\u4e0e\u9762\u90e8\u65e0\u6cd5\u5bc6\u5408\u65f6\n2\uff1a\u53e3\u7f69\u53d7\u6c61\u67d3(\u5982\u67d3\u6709\u8840\u6e0d\u6216\u98de\u6cab\u7b49\u5f02\u7269\u65f6)\n3\uff1a\u547c\u5438\u963b\u6297\u660e\u663e\u589e\u52a0\u65f6\n4\uff1a\u66fe\u4f7f\u7528\u4e8e\u4e2a\u4f8b\u75c5\u623f\u6216\u75c5\u60a3\u63a5\u89e6(\u56e0\u4e3a\u8be5\u53e3\u7f69\u5df2\u88ab\u6c61\u67d3)"}
 ```
+
 &emsp;&emsp;
+
 **HTML接口(直接显示文本)**
 
 ```http
@@ -61,6 +65,8 @@ https://wangke.hive-net.cn/wechat/searchHtml/?token=free&question=在什么情�
 {"has_reason":1, "question":在什么情况下N95口罩需要更换, "reason": 1：口罩有破损.损坏或与面部无法密合时 2：口罩受污染(如染有血渍或飞沫等异物时) 3：呼吸阻抗明显增加时 4：曾使用于个例病房或病患接触(因为该口罩已被污染), "remaining_times":868}
 ```
 
+&emsp;&emsp;
+
 
 ### **获取代码示例**
 
@@ -70,7 +76,7 @@ https://wangke.hive-net.cn/wechat/searchHtml/?token=free&question=在什么情�
 import requests
 
 def get_reason(question):
-    url = "https://www.hive-net.cn:8443/wechat/search/?token=free&question=" + question
+    url = "https://wangke.hive-net.cn/wechat/search/?token=free&question=" + question
     try:  
         r = requests.get(url)  
         r.raise_for_status()  
@@ -83,6 +89,8 @@ get_reason("在什么情况下N95口罩需要更换?")
 ```
 
 
+&emsp;&emsp;
+
 
 ### 学习交流
 
@@ -94,6 +102,8 @@ get_reason("在什么情况下N95口罩需要更换?")
 
 **哔哩哔哩：”暮至夜寒“，视频教程则会发布到这里**
 
+
+&emsp;&emsp;
 
 
 ### 获取token
