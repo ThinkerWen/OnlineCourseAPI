@@ -1,4 +1,12 @@
-# OnlineCourseAPI大学生网课刷课题库
+<div align="center">
+    <img src="https://www.hive-net.cn/Assets/SiteGlobal/Hive_blank.png" width="200" alt="HeroPower"/>
+    <h1>OnlineCourseAPI大学生网课刷课题库</h1>
+
+
+
+[![PackageVersion](https://img.shields.io/badge/java-11-orange)](https://www.oracle.com/java/technologies/downloads/#java11)
+[![PackageVersion](https://img.shields.io/badge/suggestion-issue-blue)](https://github.com/Raptor-wxw/OnlineCourseAPI/issues)
+</div>
 
 
 
@@ -19,7 +27,7 @@
 ------
 
 ```http
-https://wangke.hive-net.cn/wangke（网页端已关闭开放，api接口持续开放）
+https://www.hive-net.cn/backend/wangke/index
 ```
 
 **输入题目后回车即可**
@@ -35,34 +43,36 @@ https://wangke.hive-net.cn/wangke（网页端已关闭开放，api接口持续�
 **JSON接口(更适合微信小程序)**
 
 ```http
-https://wangke.hive-net.cn/wechat/search/?token=free&question=在什么情况下N95口罩需要更换?
+https://www.hive-net.cn/backend/wangke/search?token=free&question=我国的国体是
 ```
 
 **链接地址不变，只需要将question=后的“在什么情况下N95口罩需要更换?”更换为你像搜索的问题即可返回答案**
 
-**token=后填写你的口令用于验证身份，token=free可以每日免费获取10000次答案，口令获取方式在下方**
+**token=后填写你的口令用于验证身份，token=free可以每日免费获取10000次答案，口令获取方式在最下方**
 
-**返回值为json格式数据，其中"has_reason"为是否搜索到答案，"question"为问题，"reason"为答案，汉字为Unicode编码，转化格式即可显示汉字，示例：**
+**返回值为json格式数据，其中"code"为是否搜索到答案（0有，-1无），"question"为问题，"reason"为答案，type为题目类型（0单选，1多选），示例：**
 
 ```json
-{"has_reason": 1, "question": "\u5728\u4ec0\u4e48\u60c5\u51b5\u4e0bN95\u53e3\u7f69\u9700\u8981\u66f4\u6362?", "reason": "\n1\uff1a\u53e3\u7f69\u6709\u7834\u635f.\u635f\u574f\u6216\u4e0e\u9762\u90e8\u65e0\u6cd5\u5bc6\u5408\u65f6\n2\uff1a\u53e3\u7f69\u53d7\u6c61\u67d3(\u5982\u67d3\u6709\u8840\u6e0d\u6216\u98de\u6cab\u7b49\u5f02\u7269\u65f6)\n3\uff1a\u547c\u5438\u963b\u6297\u660e\u663e\u589e\u52a0\u65f6\n4\uff1a\u66fe\u4f7f\u7528\u4e8e\u4e2a\u4f8b\u75c5\u623f\u6216\u75c5\u60a3\u63a5\u89e6(\u56e0\u4e3a\u8be5\u53e3\u7f69\u5df2\u88ab\u6c61\u67d3)"}
-```
-
-&emsp;&emsp;
-
-**HTML接口(直接显示文本)**
-
-```http
-https://wangke.hive-net.cn/wechat/searchHtml/?token=free&question=在什么情况下N95口罩需要更换?
-```
-
-**链接地址不变，只需要将question=后的“在什么情况下N95口罩需要更换?”更换为你像搜索的问题即可返回答案**
-
-**token=后填写你的口令用于验证身份，token=free可以每日免费获取10000次答案，口令获取方式在下方**
-
-**返回值为文本数据，其中"has_reason"为是否搜索到答案，"question"为问题，"reason"为答案，示例：**
-```json
-{"has_reason":1, "question":在什么情况下N95口罩需要更换, "reason": 1：口罩有破损.损坏或与面部无法密合时 2：口罩受污染(如染有血渍或飞沫等异物时) 3：呼吸阻抗明显增加时 4：曾使用于个例病房或病患接触(因为该口罩已被污染), "remaining_times":868}
+{
+    "code": 0,
+    "data": {
+        "total": 1,
+        "reasonList": [
+            {
+                "id": 409583,
+                "question": "我国的国体是",
+                "reason": "人民民主专政",
+                "type": 1,
+                "options": "A:人民代表大会制度,B:人民民主专政,C:共产党领导的多党合作和政治协商制度,D:民族区域自治制度",
+                "explanation": "无",
+                "course": "中国大学MOOC慕课,中国大学MOOC慕课未分类",
+                "tag": "毛概,多党合作,制度"
+            }
+        ],
+        "tokenRemainTimes": 4995,
+        "tokenExpireTime": "2030-01-01"
+    }
+}
 ```
 
 &emsp;&emsp;
@@ -76,7 +86,7 @@ https://wangke.hive-net.cn/wechat/searchHtml/?token=free&question=在什么情�
 import requests
 
 def get_reason(question):
-    url = "https://wangke.hive-net.cn/wechat/search/?token=free&question=" + question
+    url = "https://www.hive-net.cn/backend/wangke/search?token=free&question=" + question
     try:  
         r = requests.get(url)  
         r.raise_for_status()  
@@ -85,7 +95,7 @@ def get_reason(question):
     except:  
         print("Fail")
 
-get_reason("在什么情况下N95口罩需要更换?")
+get_reason("我国的国体是")
 ```
 
 
