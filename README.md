@@ -83,17 +83,21 @@ https://www.hive-net.cn/backend/wangke/search?token=free&question=我国的国�
 ------
 
 ```python
+import json
 import requests
 
 def get_reason(question):
     url = "https://www.hive-net.cn/backend/wangke/search?token=free&question=" + question
-    try:  
-        r = requests.get(url)  
-        r.raise_for_status()  
-        r.encoding = r.apparent_encoding
-        print(r.json()['reason'])
-    except:  
-        print("Fail")
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        result = json.loads(response.text)
+        if result.get("code") == 0:
+            print(result.get("data"))
+        else:
+            print("无答案")
+    except:
+        print("Connection error")
 
 get_reason("我国的国体是")
 ```
