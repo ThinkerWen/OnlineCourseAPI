@@ -4,7 +4,6 @@
 
 
 
-[![PackageVersion](https://img.shields.io/badge/java-11-orange)](https://www.oracle.com/java/technologies/downloads/#java11)
 [![PackageVersion](https://img.shields.io/badge/suggestion-issue-blue)](https://github.com/Raptor-wxw/OnlineCourseAPI/issues)
 </div>
 
@@ -38,20 +37,33 @@ https://www.hive-net.cn/backend/wangke/index
 
 ------
 
-**题库答案获取api如下：**
+#### API接口：
 
-**JSON接口(更适合微信小程序)**
+```http
+https://www.hive-net.cn/backend/wangke/search?token=卡密&question=问题
+```
 
+
+#### 请求参数：
+  - `token`：填写你的口令用于验证身份（`free`可以每日免费获取5000次答案）
+  - `question`：你想搜索的问题
+
+#### 返回参数
+  - `code`：是否搜索到答案（0有，-1无）
+  - `type`：题目类型（0单选，1多选）
+  - `reason`：答案
+
+#### 使用：
+
+**链接地址不变，将`token=`后的`free`改为您的`token`，再将`question=`后的`在什么情况下N95口罩需要更换?`改为您要搜索的问题（获取token点击：[获取token](#获取token)）**
+
+#### 示例：
+
+请求：
 ```http
 https://www.hive-net.cn/backend/wangke/search?token=free&question=我国的国体是
 ```
-
-**链接地址不变，只需要将question=后的“在什么情况下N95口罩需要更换?”更换为你像搜索的问题即可返回答案**
-
-**token=后填写你的口令用于验证身份，token=free可以每日免费获取10000次答案，口令获取方式在最下方**
-
-**返回值为json格式数据，其中"code"为是否搜索到答案（0有，-1无），"question"为问题，"reason"为答案，type为题目类型（0单选，1多选），示例：**
-
+响应：
 ```json
 {
     "code": 0,
@@ -114,8 +126,6 @@ get_reason("我国的国体是")
 
 **微信公众号：“夜寒信息”，所有的教程，疑难问答，及更新信息都在这里**
 
-**哔哩哔哩：”暮至夜寒“，视频教程则会发布到这里**
-
 
 &emsp;&emsp;
 
@@ -124,10 +134,8 @@ get_reason("我国的国体是")
 
 ------
 
-**加QQ：296854007**
+**自助购买：**[点击购买](https://mall.sxjf8789.com/links/51B05514)
 
-**加微信：Rem_wife**
-
-
+**售后群：[103172845](https://qm.qq.com/cgi-bin/qm/qr?k=sJLLnl1RdSdA5nhd7IXbhCxd-k3KaoBl&authKey=ssD9NFl2r5rHhGL4SvyIF56kSJi33zxFu2LqZ0XvUUGIZN3CyhCanNyji7cNXAwo&noverify=0&group_code=103172845#)**
 
 #### **制作不易，点个Star再走，谢谢（将会获得更多免费次数）**
