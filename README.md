@@ -134,7 +134,7 @@ get_reason("我国的国体是")
 
 ------
 
-**自助购买：**[点击购买](https://mall.sxjf8789.com/links/51B05514)
+**自助购买：**[点击购买](https://www.sxjf8789.com/links/51B05514)
 
 **售后群：[103172845](https://qm.qq.com/cgi-bin/qm/qr?k=sJLLnl1RdSdA5nhd7IXbhCxd-k3KaoBl&authKey=ssD9NFl2r5rHhGL4SvyIF56kSJi33zxFu2LqZ0XvUUGIZN3CyhCanNyji7cNXAwo&noverify=0&group_code=103172845#)**
 
