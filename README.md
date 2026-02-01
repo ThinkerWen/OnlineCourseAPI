@@ -1,141 +1,240 @@
+# 🎓 在线网课题库API文档
+
 <div align="center">
-    <img src="https://www.hive-net.cn/Assets/SiteGlobal/Hive_blank.png" width="200" alt="HeroPower"/>
-    <h1>OnlineCourseAPI大学生网课刷课题库</h1>
+    <img src="https://www.hive-net.cn/Assets/SiteGlobal/Hive_blank.png" width="120" alt="HeroPower"/>
+    <h2>OnlineCourseAPI - 大学生网课答案查询服务</h2>
+    <p><strong>支持全国各大网课平台的题目答案查询</strong></p>
+    
+[![Issues](https://img.shields.io/badge/Feedback-Welcome-success)](https://github.com/ThinkerWen/OnlineCourseAPI/issues)
 
-
-
-[![PackageVersion](https://img.shields.io/badge/suggestion-issue-blue)](https://github.com/Raptor-wxw/OnlineCourseAPI/issues)
 </div>
 
+---
 
+## 📋 功能特性
 
-### 题库内容
+- ✅ **支持多平台**：超星、智慧树、知到、Welearn、四史、马原、毛概、大学MOOC等
+- ✅ **模糊搜索**：输入部分题目关键词即可匹配答案
+- ✅ **双端支持**：网页端和API接口双管齐下
+- ✅ **实时更新**：题库持续更新维护
 
-------
+---
 
-**支持各大网课的题目答案查询，超星，智慧树，知到，Welearn，四史，马原，毛概，大学mooc，等各种网课**
+## 🌐 快速开始
 
-**有网页端直接搜索，也有api接口供开发者调用**
+### 方式一：网页端搜索（推荐新手）
 
-#### 支持模糊搜索！！（输入部分题目即可搜索到答案）
+**访问地址：** https://www.hive-net.cn/backend/course/index
 
-&emsp;&emsp;
+只需输入题目关键词，回车即可查看答案。
 
-### **网页端搜索网址**
+---
 
-------
+## 🔌 API 接口文档
 
-```http
-https://www.hive-net.cn/backend/wangke/index
-```
-
-**输入题目后回车即可**
-
-&emsp;&emsp;
-
-### 答案API
-
-------
-
-#### API接口：
+### 接口地址
 
 ```http
-https://www.hive-net.cn/backend/wangke/search?token=卡密&question=问题
+GET https://www.hive-net.cn/backend/course/search?token={token}&question={question}
 ```
 
+### 请求参数
 
-#### 请求参数：
-  - `token`：填写你的口令用于验证身份（`free`可以每日免费获取5000次答案）
-  - `question`：你想搜索的问题
+| 参数 | 类型 | 必需 | 说明 |
+|------|------|------|------|
+| `token` | string | ✅ | 身份认证令牌（`free` 表示免费账户，每日10000次） |
+| `question` | string | ✅ | URL编码后的问题关键词 |
 
-#### 返回参数
-  - `code`：是否搜索到答案（0有，-1无）
-  - `type`：题目类型（0单选，1多选）
-  - `reason`：答案
+### 响应参数
 
-#### 使用：
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| `code` | int | 状态码：0=成功，-1=无结果 |
+| `data.list` | array | 答案列表 |
+| `data.remain_times` | int | 剩余查询次数 |
+| `data.expire_time` | string | Token过期时间 |
 
-**链接地址不变，将`token=`后的`free`改为您的`token`，再将`question=`后的`在什么情况下N95口罩需要更换?`改为您要搜索的问题（获取token点击：[获取token](#获取token)）**
+#### 答案对象字段
 
-#### 示例：
+| 字段 | 说明 |
+|------|------|
+| `id` | 答案ID |
+| `question` | 完整问题 |
+| `reason` | 答案内容 |
+| `type` | 题型（0=单选，1=多选） |
+| `options` | 选项列表 |
+| `explanation` | 解析说明 |
+| `course` | 所属课程 |
+| `tag` | 标签分类 |
 
-请求：
+---
+
+## 💡 使用示例
+
+### 请求示例
+
 ```http
-https://www.hive-net.cn/backend/wangke/search?token=free&question=我国的国体是
+GET https://www.hive-net.cn/backend/course/search?token=free&question=我国的国体是
 ```
-响应：
+
+### 响应示例
+
 ```json
 {
     "code": 0,
     "data": {
-        "total": 1,
-        "reasonList": [
+        "list": [
             {
-                "id": 409583,
                 "question": "我国的国体是",
-                "reason": "人民民主专政",
-                "type": 1,
-                "options": "A:人民代表大会制度,B:人民民主专政,C:共产党领导的多党合作和政治协商制度,D:民族区域自治制度",
-                "explanation": "无",
-                "course": "中国大学MOOC慕课,中国大学MOOC慕课未分类",
+                "answer": "人民民主专政",
+                "answer_type": 0,
+                "answer_options": "A:人民代表大会制度,B:人民民主专政,C:共产党领导的多党合作和政治协商制度,D:民族区域自治制度",
+                "answer_explanation": "解析见答案",
+                "course": "中国大学MOOC慕课",
                 "tag": "毛概,多党合作,制度"
             }
         ],
-        "tokenRemainTimes": 4995,
-        "tokenExpireTime": "2030-01-01"
+        "remain_times": 9995,
+        "expire_time": "2030-01-01"
     }
 }
 ```
 
-&emsp;&emsp;
+---
 
+## 📦 代码示例
 
-### **获取代码示例**
-
-------
+### Python
 
 ```python
 import json
 import requests
 
-def get_reason(question):
-    url = "https://www.hive-net.cn/backend/wangke/search?token=free&question=" + question
+def search_answer(question: str, token: str = "free") -> dict:
+    """查询网课答案"""
+    url = "https://www.hive-net.cn/backend/course/search"
+    params = {
+        "token": token,
+        "question": question
+    }
+    
     try:
-        response = requests.get(url)
+        response = requests.get(url, params=params, timeout=10)
         response.raise_for_status()
-        result = json.loads(response.text)
+        result = response.json()
+        
         if result.get("code") == 0:
-            print(result.get("data"))
+            print(f"✅ 找到 {len(result['data']['list'])} 条答案")
+            return result["data"]["list"]
         else:
-            print("无答案")
-    except:
-        print("Connection error")
+            print("❌ 未找到相关答案")
+            return []
+            
+    except requests.RequestException as e:
+        print(f"❌ 请求失败: {e}")
+        return []
 
-get_reason("我国的国体是")
+# 使用示例
+if __name__ == "__main__":
+    answers = search_answer("我国的国体是")
+    for item in answers:
+        print(f"问题: {item['question']}")
+        print(f"答案: {item['answer']}")
+        print(f"题型: {item['answer_type']}\n")
 ```
 
+### JavaScript / Node.js
 
-&emsp;&emsp;
+```javascript
+const axios = require('axios');
 
+async function searchAnswer(question, token = 'free') {
+    try {
+        const response = await axios.get('https://www.hive-net.cn/backend/course/search', {
+            params: { token, question },
+            timeout: 10000
+        });
+        
+        const { code, data } = response.data;
+        if (code === 0) {
+            console.log(`✅ 找到 ${data.list.length} 条答案`);
+            return data.list;
+        } else {
+            console.log('❌ 未找到相关答案');
+            return [];
+        }
+    } catch (error) {
+        console.error('❌ 请求失败:', error.message);
+        return [];
+    }
+}
 
-### 学习交流
+// 使用示例
+searchAnswer('我国的国体是').then(answers => {
+    answers.forEach(item => {
+        console.log(`问题: ${item.question}`);
+        console.log(`答案: ${item.answer}\n`);
+    });
+});
+```
 
-------
+---
 
-**QQ群：103172845**
+## 🔑 获取 Token
 
-**微信公众号：“夜寒信息”，所有的教程，疑难问答，及更新信息都在这里**
+### 方式一：免费试用
 
+- Token: `free`
+- 限制：每日10000次查询
+- 有效期：永久
 
-&emsp;&emsp;
+### 方式二：购买正式Token
 
+👉 [自助购买 Token](https://www.sxjf8789.com/links/51B05514)
 
-### 获取token
+---
 
-------
+## 📞 技术支持
 
-**自助购买：**[点击购买](https://www.sxjf8789.com/links/51B05514)
+| 渠道 | 联系方式 |
+|------|--------|
+| **QQ群** | [103172845](https://qm.qq.com/cgi-bin/qm/qr?k=sJLLnl1RdSdA5nhd7IXbhCxd-k3KaoBl&authKey=ssD9NFl2r5rHhGL4SvyIF56kSJi33zxFu2LqZ0XvUUGIZN3CyhCanNyji7cNXAwo&noverify=0&group_code=103172845#) |
+| **微信公众号** | 夜寒信息 |
 
-**售后群：[103172845](https://qm.qq.com/cgi-bin/qm/qr?k=sJLLnl1RdSdA5nhd7IXbhCxd-k3KaoBl&authKey=ssD9NFl2r5rHhGL4SvyIF56kSJi33zxFu2LqZ0XvUUGIZN3CyhCanNyji7cNXAwo&noverify=0&group_code=103172845#)**
+> 💡 **说明**：公众号提供教程、疑难问答、更新公告等完整支持
 
-#### **制作不易，点个Star再走，谢谢（将会获得更多免费次数）**
+---
+
+## ⚠️ 常见问题
+
+**Q: 为什么提示"无答案"？**
+A: 题目可能不在数据库中，或者搜索关键词不够准确。建议尝试更换关键词或使用模糊搜索。
+
+**Q: 免费Token有次数限制吗？**
+A: 有，每日10000次。超过限制需要购买正式Token或等待次日重置。
+
+**Q: 支持哪些网课平台？**
+A: 超星、智慧树、知到、Welearn、四史、马原、毛概、大学MOOC等主流平台。
+
+---
+
+## 📝 更新日志
+
+- **v1.0.0** (2024-01-01)
+  - ✨ 正式上线，支持多平台答案查询
+  - ✨ 实现模糊搜索功能
+  - ✨ 提供网页端和API接口
+
+---
+
+## 🙏 致谢
+
+> 感谢您的使用和支持！如果觉得有帮助，请给项目一个⭐Star
+
+---
+
+<div align="center">
+    <p><strong>Made with ❤️ by Hive Team</strong></p>
+    <p>© 2024 All Rights Reserved</p>
+</div>
+
