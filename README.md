@@ -90,6 +90,10 @@ POST JSON 请求体示例：
 ### 请求示例
 
 ```http
+GET https://www.hive-net.cn/backend/course/search?token=free&question=我国的国体是
+```
+
+```http
 POST https://www.hive-net.cn/backend/course/search
 Content-Type: application/json
 
